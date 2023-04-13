@@ -15,7 +15,7 @@
           Quasar App
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <a class="link" target="_blanck" href="https://www.linkedin.com/in/skymarkos7/"><div>Marcos Lourenço</div></a>
       </q-toolbar>
     </q-header>
 
@@ -28,7 +28,7 @@
         <q-item-label
           header
         >
-          Essential Links
+          Navegue
         </q-item-label>
 
         <EssentialLink
@@ -51,47 +51,29 @@ import EssentialLink from 'components/EssentialLink.vue'
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
+    title: 'Comics',
+    caption: 'Comics Marvel',
+    icon: 'menu_book',
+    link: '#'
+  },
+  {
+    title: 'Share',
+    caption: 'Share with friends',
+    icon: 'record_voice_over',
+    link: '#'
+  },
+  {
+    title: 'Favorites',
+    caption: 'The best comics',
+    icon: 'favorite',
+    link: 'https://awesome.quasar.dev'
   },
   {
     title: 'Github',
-    caption: 'github.com/quasarframework',
+    caption: 'Repository',
     icon: 'code',
-    link: 'https://github.com/quasarframework'
+    link: 'https://github.com/skymarkos7/Marvel-comics'
   },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
 ]
 
 export default defineComponent({
@@ -114,3 +96,10 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped>
+.link{
+  text-decoration: none;
+  color: white;
+}
+</style>
