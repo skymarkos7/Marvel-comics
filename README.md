@@ -1,7 +1,7 @@
 # Quasar App (marvel-comics)
 
 listagem de quadrinhos marvel
-
+# Using framework to vue (quasar)
 ## Install the dependencies
 ```bash
 yarn
@@ -12,6 +12,8 @@ npm install
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash
 quasar dev
+# or
+npx quasar dev
 ```
 
 
@@ -35,7 +37,7 @@ npm run format
 ### Build the app for production
 ```bash
 quasar build
+# or
+npx quasar build
 ```
 
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js).
