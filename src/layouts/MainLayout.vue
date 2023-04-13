@@ -54,25 +54,30 @@ const linksList = [
     title: 'Comics',
     caption: 'Comics Marvel',
     icon: 'menu_book',
-    link: '#'
+    link: '#/ComicsPage',
+    target:"_self"
+
   },
   {
     title: 'Share',
     caption: 'Share with friends',
     icon: 'record_voice_over',
-    link: '#'
+    link: '#',
+    target:"_self"
   },
   {
     title: 'Favorites',
     caption: 'The best comics',
     icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
+    link: 'https://awesome.quasar.dev',
+    target:"_self"
   },
   {
     title: 'Github',
     caption: 'Repository',
     icon: 'code',
-    link: 'https://github.com/skymarkos7/Marvel-comics'
+    link: 'https://github.com/skymarkos7/Marvel-comics',
+    target:"_self"
   },
 ]
 
