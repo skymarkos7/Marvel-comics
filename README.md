@@ -41,3 +41,15 @@ quasar build
 npx quasar build
 ```
 
+
+
+# About
+- Screem of load
+- api with axios
+  - autentication api for get infos
+    - apikey public
+    - ts actualy
+    - hash = apikey public + apikey private + ts
+-
+
+

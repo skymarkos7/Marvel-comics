@@ -2,7 +2,7 @@
   "name": "marvel-comics",
   "version": "0.0.1",
   "description": "listagem de quadrinhos marvel",
-  "productName": "Quasar App",
+  "productName": "Comics Marvel",
   "author": "MARCOS LOURENCO DE SOUZA <30378367+skymarkos7@users.noreply.github.com>",
   "private": true,
   "scripts": {

@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          Comics Marvel
         </q-toolbar-title>
 
         <a class="link" target="_blanck" href="https://www.linkedin.com/in/skymarkos7/"><div>Marcos Lourenço</div></a>
