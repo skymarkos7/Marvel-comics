@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page style="background-color:rgb(245,245,245)" class="flex flex-center">
     <div class="q-pa-md row items-start q-gutter-md">
       <i class="fa fa-spinner fa-spin flex flex-center" v-show="load">
         <q-circular-progress
@@ -13,17 +13,26 @@
       </i>
 
       <div class="row justify-around items-center" v-if="!load">
-        <q-card
+        <div
           v-for="(comic, index) in comics"
           :key="index"
-          style="width: 300px"
-          class="my-card"
+          style="width: 250px; height:380px; margin-bottom: 30px;"
+          class="cointainer"
         >
-          <q-img :src="comic.thumbnail.path+'.'+comic.thumbnail.extension"> </q-img>
-          <q-card-section>
-            {{ comic.title }}
-          </q-card-section>
-        </q-card>
+          <q-card
+          style="width: 250px; height:350px"
+
+          class="my-card">
+            <q-img
+            style="width: 100%; height: 100%; float:"
+              :src="comic.thumbnail.path + '.' + comic.thumbnail.extension"
+            >
+            </q-img>
+            <q-card-section>
+              {{ comic.title }}
+            </q-card-section>
+          </q-card>
+        </div>
       </div>
     </div>
   </q-page>
@@ -43,7 +52,7 @@ export default defineComponent({
       hash: "ffa8f49a7ad19d9936f7f69be7ac1caa",
       baseUrl: "http://gateway.marvel.com/v1/public/comics",
       load: false,
-      comics: []
+      comics: [],
     };
   },
   setup() {

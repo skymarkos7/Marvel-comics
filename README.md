@@ -44,12 +44,15 @@ npx quasar build
 
 
 # About
+## characteristics:
 - Screem of load
 - api with axios
   - autentication api for get infos
     - apikey public
     - ts actualy
     - hash = apikey public + apikey private + ts
--
+- versioning
+  - Using github on branch **develop** for development
+
 
 
