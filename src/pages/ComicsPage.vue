@@ -46,6 +46,8 @@
 
                     </div>
 
+                    <p v-if="detailsComics.textObjects.length>0"><b>Resume:</b> <br>{{ detailsComics.textObjects[0].text }}</p>
+
                   </div>
 
                   <p class="text-h5" style="margin-top:50px"><b>printPrice:</b> {{ detailsComics.prices[0].price }}</p>
