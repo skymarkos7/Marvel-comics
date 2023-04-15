@@ -1,35 +1,54 @@
 <template>
-  <q-page style="background-color:rgb(245,245,245)" class="flex flex-center">
+  <q-page style="background-color: rgb(245, 245, 245)" class="flex flex-center">
     <div class="q-pa-md row items-start q-gutter-md">
       <i class="fa fa-spinner fa-spin flex flex-center" v-show="load">
-        <LoadComponent/>
+        <LoadComponent />
       </i>
 
       <div class="row justify-around items-center" v-if="!load">
-
-        <q-dialog
-          v-model="modal"
-          full-width
-        >
+        <q-dialog v-model="modal" full-width>
           <q-card>
             <q-card-section>
-              <div class="text-h6">Full Width</div>
+              <div class="text-h6">MORE DETAILS</div>
             </q-card-section>
 
             <q-card-section class="q-pt-none">
-
-
               <i class="fa fa-spinner fa-spin flex flex-center" v-show="load">
-                <LoadComponent/>
+                <LoadComponent />
               </i>
 
+              <div class="containerDetails row">
+                <div class="imgDetails">
+                  <q-img
+                    :src="
+                      detailsComics.thumbnail.path +
+                      '.' +
+                      detailsComics.thumbnail.extension
+                    "
+                  >
+                  </q-img>
+                </div>
 
+                <div style="border: 1px red solid; margin-left: 40px">
+                  <p class="text-h4">{{ detailsComics.title }}</p>
+                  <p><b>OnSale Date:</b> {{ date }}</p>
 
+                  <div class="creators row">
+                    <div
+                      v-for="(datail, index) in detailsComics.creators.items"
+                      :key="index"
+                      class="column"
+                      style="width:50%"
+                    >
+                    <p class="text-h5">{{ datail.role }}:</p>
+                     <p class="text-subtitle2"> {{ datail.name }} </p>
+                    </div>
 
+                  </div>
 
-              Click/Tap on the backdrop.
-
-              The id is {{ idComic }}
+                  <p><b>printPrice:</b> {{ detailsComics.prices[0].price }}</p>
+                </div>
+              </div>
             </q-card-section>
 
             <q-card-actions align="right" class="bg-white text-teal">
@@ -38,25 +57,19 @@
           </q-card>
         </q-dialog>
 
-
-
-
-
-
-
         <div
           v-for="(comic, index) in comics"
           :key="index"
-          style="width: 250px; height:380px; margin-bottom: 45px;"
+          style="width: 250px; height: 380px; margin-bottom: 45px"
           class="cointainer"
         >
           <q-card
-          style="width: 250px; height:350px"
-
-          @click="fullWidth(comic.id, true)"
-          class="my-card">
+            style="width: 250px; height: 350px"
+            @click="fullWidth(comic.id, true)"
+            class="my-card"
+          >
             <q-img
-            style="width: 100%; height: 100%; float:"
+              style="width: 100%; height: 100%; float: "
               :src="comic.thumbnail.path + '.' + comic.thumbnail.extension"
             >
             </q-img>
@@ -79,8 +92,8 @@ import { useStore } from "vuex";
 
 export default defineComponent({
   name: "ComicsPage",
-  components:{
-    LoadComponent
+  components: {
+    LoadComponent,
   },
   data() {
     return {
@@ -90,12 +103,14 @@ export default defineComponent({
       load: false,
       comics: [],
       modal: false,
-      idComic: ''
+      idComic: "",
+      detailsComics: [],
+      date: "",
     };
   },
   setup() {
     return {
-      lorem: "Lorem ipsum dolor dolore magna aliqua."
+      lorem: "Lorem ipsum dolor dolore magna aliqua.",
     };
   },
   methods: {
@@ -119,25 +134,29 @@ export default defineComponent({
           this.load = false; // defined load for false after call to API
         });
     },
-    fullWidth(id){
-      this.modal = true
-      this.idComic = id
-      console.log(id)
+    fullWidth(id) {
+      this.modal = true;
+      this.idComic = id;
+      console.log(id);
 
       const url = `http://gateway.marvel.com/v1/public/comics/${id}?apikey=${this.apikey}&ts=${this.ts}&hash=${this.hash}`;
       this.load = true; // defined load for true before call to API
       api
-        .get(url, {
-        })
+        .get(url, {})
         .then((response) => {
-          this.detailsComics = response.data.data
-          console.log(response.data.data);
+          this.detailsComics = response.data.data.results[0];
+          console.log(response.data.data.results[0]);
 
+          /**
+           * Formact to date
+           */
+          const date = new Date(response.data.data.results[0].dates[0].date);
+          const options = { month: "long", day: "numeric", year: "numeric" };
+          this.date = date.toLocaleDateString("en-US", options);
         })
         .finally(() => {
           this.load = false; // defined load for false after call to API
         });
-
     },
   },
   mounted: function () {
@@ -145,3 +164,15 @@ export default defineComponent({
   },
 });
 </script>
+
+
+
+<style scoped>
+/* .imgDetails{
+  width:300px;
+  border-radius: 50px;
+  background: #e0e0e0;
+  box-shadow:  28px 28px 56px #b3b3b3,
+              -28px -28px 56px #ffffff;
+} */
+</style>
