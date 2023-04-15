@@ -18,7 +18,7 @@
               </i>
 
               <div class="containerDetails row">
-                <div style="width:300px" class="imgDetails">
+                <div style="width:300px; margin-right: 40px;" class="imgDetails">
                   <q-img
 
                     :src="
@@ -30,7 +30,7 @@
                   </q-img>
                 </div>
 
-                <div style="border:1px red solid; width:60%; margin-left: 40px;">
+                <div style="border:1px red solid; width:60%; min-width: 300px; ">
                   <p class="text-h5">{{ detailsComics.title }}</p>
                   <p><b>OnSale Date:</b> {{ date }}</p>
 
