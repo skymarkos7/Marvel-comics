@@ -18,8 +18,9 @@
               </i>
 
               <div class="containerDetails row">
-                <div class="imgDetails">
+                <div style="width:300px" class="imgDetails">
                   <q-img
+
                     :src="
                       detailsComics.thumbnail.path +
                       '.' +
@@ -29,24 +30,25 @@
                   </q-img>
                 </div>
 
-                <div style="border: 1px red solid; margin-left: 40px">
-                  <p class="text-h4">{{ detailsComics.title }}</p>
+                <div style="border:1px red solid; width:60%; margin-left: 40px;">
+                  <p class="text-h5">{{ detailsComics.title }}</p>
                   <p><b>OnSale Date:</b> {{ date }}</p>
 
                   <div class="creators row">
                     <div
                       v-for="(datail, index) in detailsComics.creators.items"
                       :key="index"
-                      class="column"
                       style="width:50%"
                     >
-                    <p class="text-h5">{{ datail.role }}:</p>
-                     <p class="text-subtitle2"> {{ datail.name }} </p>
+                    <p class="text-h6">{{ datail.role }}:<br>
+                      <span class="text-subtitle1">{{ datail.name }}</span>
+                    </p>
+
                     </div>
 
                   </div>
 
-                  <p><b>printPrice:</b> {{ detailsComics.prices[0].price }}</p>
+                  <p class="text-h5" style="margin-top:50px"><b>printPrice:</b> {{ detailsComics.prices[0].price }}</p>
                 </div>
               </div>
             </q-card-section>
@@ -167,12 +169,3 @@ export default defineComponent({
 
 
 
-<style scoped>
-/* .imgDetails{
-  width:300px;
-  border-radius: 50px;
-  background: #e0e0e0;
-  box-shadow:  28px 28px 56px #b3b3b3,
-              -28px -28px 56px #ffffff;
-} */
-</style>
