@@ -59,13 +59,6 @@ const linksList = [
 
   },
   {
-    title: 'Share',
-    caption: 'Shared with friends',
-    icon: 'record_voice_over',
-    link: '#',
-    target:"_self"
-  },
-  {
     title: 'Favorites',
     caption: 'The best comics',
     icon: 'favorite',
@@ -76,6 +69,13 @@ const linksList = [
     title: 'Search',
     caption: 'Search comics',
     icon: 'search',
+    link: '#',
+    target:"_self"
+  },
+  {
+    title: 'Sent',
+    caption: 'Sent comics',
+    icon: 'send',
     link: '#',
     target:"_self"
   },

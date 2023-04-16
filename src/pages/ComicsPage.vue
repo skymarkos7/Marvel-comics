@@ -4,6 +4,10 @@
       <i class="fa fa-spinner fa-spin flex flex-center" v-show="load">
         <LoadComponent />
       </i>
+      <div class="q-px-sm q-mt-sm">
+      Your selection is: <strong>{{ selecteds }}</strong>
+    </div>
+
       <div v-if="!load">
         <div class="justify-between row">
           <q-toggle
@@ -16,7 +20,8 @@
             v-if="select"
             color="red"
             icon-right="send"
-            label="Send comics"
+            to="SendToMap"
+            :label="'Send to comics selecteds: '+selecteds.length"
           />
         </div>
 
@@ -109,12 +114,7 @@
                 style="width: 100%; height: 100%; float: "
                 :src="comic.thumbnail.path + '.' + comic.thumbnail.extension"
               >
-                <q-checkbox
-                  v-if="select"
-                  @click="selecteds(comic.id, checked)"
-                  label="Select"
-                  color="cyan"
-                />
+                <q-checkbox v-if="select" @click="selected(comic.id, checked)" v-model="selecteds" :val=comic.id label="Select" color="orange"></q-checkbox>
               </q-img>
               <q-card-section>
                 {{ comic.title }}
@@ -132,7 +132,6 @@ import { defineComponent } from "vue";
 import { api } from "../boot/axios";
 import LoadComponent from "src/components/LoadComponent.vue";
 import { ref } from "vue";
-import CryptoJS from "crypto-js";
 
 export default defineComponent({
   name: "ComicsPage",
@@ -155,6 +154,7 @@ export default defineComponent({
       detailsComics: [],
       date: "",
       checkedtemp: "",
+      selecteds:[]
     };
   },
   setup() {
@@ -177,7 +177,7 @@ export default defineComponent({
         })
         .then((response) => {
           this.comics = response.data.data.results;
-          console.log(response.data.data.results);
+          // console.log(response.data.data.results);
         })
         .finally(() => {
           this.load = false; // defined load for false after call to API
@@ -186,7 +186,7 @@ export default defineComponent({
     fullWidth(id) {
       this.modal = true;
       this.idComic = id;
-      console.log(id);
+      // console.log(id);
 
       const url = `http://gateway.marvel.com/v1/public/comics/${id}?apikey=${this.apikey}&ts=${this.ts}&hash=${this.hash}`;
       this.load = true; // defined load for true before call to API
@@ -194,7 +194,7 @@ export default defineComponent({
         .get(url, {})
         .then((response) => {
           this.detailsComics = response.data.data.results[0];
-          console.log(response.data.data.results[0]);
+          // console.log(response.data.data.results[0]);
 
           /**
            * Formact to date
@@ -207,10 +207,10 @@ export default defineComponent({
           this.load = false; // defined load for false after call to API
         });
     },
-    selecteds(e) {
+    selected(e) {
       if (checkedtemp == e) {
       }
-      console.log(this.checked);
+      // console.log(this.checked);
     },
   },
   mounted: function () {
