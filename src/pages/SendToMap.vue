@@ -13,26 +13,26 @@
               />
               <span class="sb-title">Address Selection</span>
             </div>
-            <q-input v-model="ph" placeholder="Address" :dense="dense" />
+            <q-input v-model="address" placeholder="Address" :dense="dense" />
             <q-input
-              v-model="ph"
-              placeholder="Apt, Suite, etc (optional)"
+              v-model="number"
+              placeholder="Apt, number, Suite, etc (optional)"
               :dense="dense"
             />
-            <q-input v-model="ph" placeholder="City" :dense="dense" />
+            <q-input v-model="city" placeholder="City" :dense="dense" />
             <div class="half-input-container">
               <q-input
-                v-model="ph"
+                v-model="state"
                 placeholder="state/Province"
                 :dense="dense"
               />
               <q-input
-                v-model="ph"
+                v-model="zipcode"
                 placeholder="zip/Postal code"
                 :dense="dense"
               />
             </div>
-            <q-input v-model="ph" placeholder="Country" :dense="dense" />
+            <q-input v-model="country" placeholder="Country" :dense="dense" />
             <button style="margin-top: 20px" class="button-cta">Send to</button>
           </div>
           <div class="map" id="gmp-map"></div>
@@ -49,7 +49,12 @@
 export default {
   data() {
     return {
-      datas: "",
+      address: "",
+      number: "",
+      city: "",
+      state: "",
+      zipcode: "",
+      country: "",
     };
   },
   mounted: function () {
@@ -83,6 +88,13 @@ export default {
 
       var mensagem =
         document.getElementById("myiframe").contentWindow.response.results;
+      this.address = mensagem[0].address_components[1].long_name;
+      this.number = mensagem[0].address_components[0].long_name;
+      this.city = mensagem[0].address_components[2].long_name;
+      this.state = mensagem[0].address_components[3].long_name;
+      this.zipcode = mensagem[0].address_components[5].long_name;
+      this.country = mensagem[0].address_components[4].long_name;
+
       console.log(mensagem); // Saída: "Olá, mundo!"
     },
   },
