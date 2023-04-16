@@ -1,48 +1,37 @@
 <template>
-  <div>
-    <div ref="map" style="height: 400px"></div>
-  </div>
+  <div style="width: 60%; height: 700px" ref="page"></div>
 </template>
 
-<script>
-import { defineComponent } from "vue";
 
-export default defineComponent({
-  name: "SendToMap",
+<script>
+export default {
   data() {
-    return {
-      map: null,
-      marker: null,
-    };
+    return {};
   },
   mounted: function () {
-    // Crie o mapa do Google Maps
-    this.map = new google.maps.Map(this.$refs.map, {
-      center: { lat: -33.8688, lng: 151.2093 },
-      zoom: 13
-    });
-
-    // Adicione um marcador ao mapa
-    this.marker = new google.maps.Marker({
-      position: { lat: -33.8688, lng: 151.2093 },
-      map: this.map
-    });
-
-    // Adicione um evento de clique ao marcador
-    this.marker.addListener("click", () => {
-      // Obtenha o endereço do marcador
-      const geocoder = new google.maps.Geocoder();
-      geocoder.geocode({ location: this.marker.getPosition() }, (results, status) => {
-        if (status === "OK") {
-          if (results[0]) {
-            // Exiba o endereço em um alerta
-            alert(results[0].formatted_address);
-          }
-        } else {
-          console.log("Geocode failed: " + status);
-        }
-      });
-    });
+    const page = this.$refs.page;
+    const iframe = document.createElement("iframe");
+    iframe.src = "/pages/index.html";
+    iframe.style.width = "100%";
+    iframe.style.height = "100%";
+    iframe.onload = () => {
+      const pageDocument = iframe.contentDocument;
+      const head = pageDocument.querySelector("head");
+      const body = pageDocument.querySelector("body");
+      const style = document.createElement("link");
+      style.rel = "stylesheet";
+      style.type = "text/css";
+      style.href = "/pages/style.css";
+      head.appendChild(style);
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "/pages/script.js";
+      body.appendChild(script);
+    };
+    page.appendChild(iframe);
   },
-});
+  methods: {},
+};
 </script>
+
+
