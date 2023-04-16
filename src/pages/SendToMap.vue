@@ -13,25 +13,27 @@
               />
               <span class="sb-title">Address Selection</span>
             </div>
-            <input type="text" placeholder="Address" id="location-input" />
-            <input type="text" placeholder="Apt, Suite, etc (optional)" />
-            <input type="text" placeholder="City" id="locality-input" />
+            <q-input v-model="ph" placeholder="Address" :dense="dense" />
+            <q-input
+              v-model="ph"
+              placeholder="Apt, Suite, etc (optional)"
+              :dense="dense"
+            />
+            <q-input v-model="ph" placeholder="City" :dense="dense" />
             <div class="half-input-container">
-              <input
-                type="text"
-                class="half-input"
-                placeholder="State/Province"
-                id="administrative_area_level_1-input"
+              <q-input
+                v-model="ph"
+                placeholder="state/Province"
+                :dense="dense"
               />
-              <input
-                type="text"
-                class="half-input"
-                placeholder="Zip/Postal code"
-                id="postal_code-input"
+              <q-input
+                v-model="ph"
+                placeholder="zip/Postal code"
+                :dense="dense"
               />
             </div>
-            <input type="text" placeholder="Country" id="country-input" />
-            <button class="button-cta">Send to</button>
+            <q-input v-model="ph" placeholder="Country" :dense="dense" />
+            <button style="margin-top: 20px" class="button-cta">Send to</button>
           </div>
           <div class="map" id="gmp-map"></div>
         </div>
