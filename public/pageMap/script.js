@@ -6,7 +6,7 @@ let response;
 
 map = new google.maps.Map(document.getElementById("map"), {
   zoom: 8,
-  center: { lat: -34.397, lng: 150.644 },
+  center: { lat: -9.5713058, lng: -36.7819505 },
   mapTypeControl: false,
 });
 geocoder = new google.maps.Geocoder();
