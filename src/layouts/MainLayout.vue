@@ -60,7 +60,7 @@ const linksList = [
   },
   {
     title: 'Share',
-    caption: 'Share with friends',
+    caption: 'Shared with friends',
     icon: 'record_voice_over',
     link: '#',
     target:"_self"
@@ -70,6 +70,13 @@ const linksList = [
     caption: 'The best comics',
     icon: 'favorite',
     link: 'https://awesome.quasar.dev',
+    target:"_self"
+  },
+  {
+    title: 'Search',
+    caption: 'Search comics',
+    icon: 'search',
+    link: '#',
     target:"_self"
   },
   {

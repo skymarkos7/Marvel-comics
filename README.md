@@ -55,4 +55,13 @@ npx quasar build
   - Using github on branch **develop** for development
 
 
+  ## pendencia
+  - carregar paginação
+  - permitir compartilhar
+  - aplicar transparência
+  - possibilidade de filtro
+  - favoritar
+  - atualizar o hash a cada chamada
+
+
 

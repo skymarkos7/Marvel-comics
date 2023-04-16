@@ -4,83 +4,123 @@
       <i class="fa fa-spinner fa-spin flex flex-center" v-show="load">
         <LoadComponent />
       </i>
+      <div v-if="!load">
+        <div class="justify-between row">
+          <q-toggle
+            style="margin-bottom: 15px"
+            v-model="select"
+            label="select items to send"
+          />
+          <q-btn
+            style="margin-bottom: 15px"
+            v-if="select"
+            color="red"
+            icon-right="send"
+            label="Send comics"
+          />
+        </div>
 
-      <div class="row justify-around items-center" v-if="!load">
-        <q-dialog v-model="modal" full-width>
-          <q-card>
-            <q-card-section>
-              <div class="text-h6">MORE DETAILS</div>
-            </q-card-section>
+        <div class="row justify-around items-center">
+          <div id="containermodal" style="max-width: 300px">
+            <q-dialog v-model="modal" full-width>
+              <q-card id="modalsize" class="modalsize">
+                <q-card-section>
+                  <div class="text-h6">MORE DETAILS</div>
+                </q-card-section>
 
-            <q-card-section class="q-pt-none">
-              <i class="fa fa-spinner fa-spin flex flex-center" v-show="load">
-                <LoadComponent />
-              </i>
-
-              <div class="containerDetails row">
-                <div style="width:300px; margin-right: 40px;" class="imgDetails">
-                  <q-img
-
-                    :src="
-                      detailsComics.thumbnail.path +
-                      '.' +
-                      detailsComics.thumbnail.extension
-                    "
+                <q-card-section class="q-pt-none">
+                  <i
+                    class="fa fa-spinner fa-spin flex flex-center"
+                    v-show="load"
                   >
-                  </q-img>
-                </div>
+                    <LoadComponent />
+                  </i>
 
-                <div style="border:1px red solid; width:60%; min-width: 300px; ">
-                  <p class="text-h5">{{ detailsComics.title }}</p>
-                  <p><b>OnSale Date:</b> {{ date }}</p>
-
-                  <div class="creators row">
+                  <div class="containerDetails row">
                     <div
-                      v-for="(datail, index) in detailsComics.creators.items"
-                      :key="index"
-                      style="width:50%"
+                      style="width: 300px; margin-right: 40px"
+                      class="imgDetails"
                     >
-                    <p class="text-h6">{{ datail.role }}:<br>
-                      <span class="text-subtitle1">{{ datail.name }}</span>
-                    </p>
-
+                      <q-img
+                        :src="
+                          detailsComics.thumbnail.path +
+                          '.' +
+                          detailsComics.thumbnail.extension
+                        "
+                      >
+                      </q-img>
                     </div>
 
-                    <p v-if="detailsComics.textObjects.length>0"><b>Resume:</b> <br>{{ detailsComics.textObjects[0].text }}</p>
+                    <div style="width: 60%; min-width: 300px">
+                      <p class="text-h5">{{ detailsComics.title }}</p>
+                      <p><b>OnSale Date:</b> {{ date }}</p>
 
+                      <div class="creators row">
+                        <div
+                          v-for="(datail, index) in detailsComics.creators
+                            .items"
+                          :key="index"
+                          style="width: 50%"
+                        >
+                          <p class="text-h6">
+                            {{ datail.role }}:<br />
+                            <span class="text-subtitle1">{{
+                              datail.name
+                            }}</span>
+                          </p>
+                        </div>
+
+                        <p
+                          style="margin-top: 40px"
+                          v-if="detailsComics.textObjects.length > 0"
+                        >
+                          <b>Resume:</b> <br />{{
+                            detailsComics.textObjects[0].text
+                          }}
+                        </p>
+                      </div>
+
+                      <p class="text-h5" style="margin-top: 50px">
+                        <b>printPrice: $</b> {{ detailsComics.prices[0].price }}
+                      </p>
+                    </div>
                   </div>
+                </q-card-section>
 
-                  <p class="text-h5" style="margin-top:50px"><b>printPrice:</b> {{ detailsComics.prices[0].price }}</p>
-                </div>
-              </div>
-            </q-card-section>
+                <q-card-actions align="right" class="bg-white text-teal">
+                  <q-btn flat label="OK" v-close-popup />
+                </q-card-actions>
+              </q-card>
+            </q-dialog>
+          </div>
 
-            <q-card-actions align="right" class="bg-white text-teal">
-              <q-btn flat label="OK" v-close-popup />
-            </q-card-actions>
-          </q-card>
-        </q-dialog>
-
-        <div
-          v-for="(comic, index) in comics"
-          :key="index"
-          style="width: 250px; height: 380px; margin-bottom: 45px"
-          class="cointainer"
-        >
-          <q-card
-            style="width: 250px; height: 350px"
-            @click="fullWidth(comic.id, true)"
-            class="my-card"
+          <div
+            v-for="(comic, index) in comics"
+            :key="index"
+            style="width: 250px; height: 380px; margin-bottom: 50px"
+            class="cointainer"
           >
-            <q-img
-              style="width: 100%; height: 100%; float: "
-              :src="comic.thumbnail.path + '.' + comic.thumbnail.extension"
+            <q-card
+              style="width: 250px; height: 350px"
+              @click="fullWidth(comic.id, true)"
+              class="my-card"
             >
-            </q-img>
-            <q-card-section>
-              {{ comic.title }}
-            </q-card-section>
-          </q-card>
+              <q-img
+                style="width: 100%; height: 100%; float: "
+                :src="comic.thumbnail.path + '.' + comic.thumbnail.extension"
+              >
+                <q-checkbox
+                  v-if="select"
+                  @click="selecteds(comic.id, checked)"
+                  label="Select"
+                  color="cyan"
+                />
+              </q-img>
+              <q-card-section>
+                {{ comic.title }}
+              </q-card-section>
+            </q-card>
+          </div>
         </div>
       </div>
     </div>
@@ -92,7 +132,7 @@ import { defineComponent } from "vue";
 import { api } from "../boot/axios";
 import LoadComponent from "src/components/LoadComponent.vue";
 import { ref } from "vue";
-import { useStore } from "vuex";
+import CryptoJS from "crypto-js";
 
 export default defineComponent({
   name: "ComicsPage",
@@ -104,12 +144,17 @@ export default defineComponent({
       apikey: "a259607932a87320eddcc6417800ca53",
       ts: "1681397974539",
       hash: "ffa8f49a7ad19d9936f7f69be7ac1caa",
+      limit: 52,
+      offset: "",
       load: false,
+      select: false,
+      selecionado: false,
       comics: [],
       modal: false,
       idComic: "",
       detailsComics: [],
       date: "",
+      checkedtemp: "",
     };
   },
   setup() {
@@ -119,7 +164,7 @@ export default defineComponent({
   },
   methods: {
     loadData() {
-      const url = `http://gateway.marvel.com/v1/public/comics?apikey=${this.apikey}&ts=${this.ts}&hash=${this.hash}`;
+      const url = `http://gateway.marvel.com/v1/public/comics?apikey=${this.apikey}&ts=${this.ts}&hash=${this.hash}&limit=${this.limit}`;
       this.load = true; // defined load for true before call to API
       api
         .get(url, {
@@ -162,12 +207,24 @@ export default defineComponent({
           this.load = false; // defined load for false after call to API
         });
     },
+    selecteds(e) {
+      if (checkedtemp == e) {
+      }
+      console.log(this.checked);
+    },
   },
   mounted: function () {
     this.loadData();
   },
 });
 </script>
+
+<style>
+.containermodal {
+  width: 50% !important;
+  max-width: 500px !important;
+}
+</style>
 
 
 
