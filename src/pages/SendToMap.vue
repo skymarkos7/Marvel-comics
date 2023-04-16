@@ -56,6 +56,7 @@ export default {
     const page = this.$refs.page;
     const iframe = document.createElement("iframe");
     iframe.src = "/pageMap/index.html";
+    iframe.id = "myiframe";
     iframe.style.width = "100%";
     iframe.style.height = "100%";
     iframe.onload = () => {
@@ -73,12 +74,16 @@ export default {
       body.appendChild(script);
     };
     page.appendChild(iframe);
-
-    this.datas = iframe;
   },
   methods: {
     data() {
-      console.log(this.datas);
+      // console.log(this.datas);
+      // var nome = new URLSearchParams(window.location.search).get("nome");
+      // console.log(nome);
+
+      var mensagem =
+        document.getElementById("myiframe").contentWindow.response.results;
+      console.log(mensagem); // Saída: "Olá, mundo!"
     },
   },
 };

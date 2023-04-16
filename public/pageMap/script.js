@@ -4,6 +4,8 @@ let geocoder;
 let responseDiv;
 let response;
 
+var mensagem = "Olá, mundo!"; //provisório
+
 map = new google.maps.Map(document.getElementById("map"), {
   zoom: 8,
   center: { lat: -9.5713058, lng: -36.7819505 },
@@ -75,6 +77,8 @@ function geocode(request) {
       marker.setMap(map);
       responseDiv.style.display = "block";
       response.innerText = JSON.stringify(result, null, 2);
+      response.results = results;
+      // console.log(results);
       return results;
     })
     .catch((e) => {
