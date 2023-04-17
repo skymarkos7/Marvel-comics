@@ -64,8 +64,5 @@ npx quasar build
   ## pendencia
 
   - carregar paginação
-  - permitir compartilhar
-  - aplicar transparência
   - possibilidade de filtro
-  - favoritar
   - atualizar o hash a cada chamada

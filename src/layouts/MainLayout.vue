@@ -53,13 +53,6 @@ const linksList = [
     target: "_self",
   },
   {
-    title: "Favorites",
-    caption: "The best comics",
-    icon: "favorite",
-    link: "#/favorites",
-    target: "_self",
-  },
-  {
     title: "Search",
     caption: "Search comics",
     icon: "search",
@@ -67,7 +60,7 @@ const linksList = [
     target: "_self",
   },
   {
-    title: "Sent",
+    title: "Sent ",
     caption: "Sent comics",
     icon: "send",
     link: "#/sent",
@@ -84,6 +77,11 @@ const linksList = [
 
 export default defineComponent({
   name: "MainLayout",
+  data() {
+    return {
+      dado: "ssss",
+    };
+  },
 
   components: {
     EssentialLink,

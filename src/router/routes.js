@@ -7,6 +7,7 @@ const routes = [
       { path: "comics", component: () => import("pages/ComicsPage.vue") },
       { path: "sendtomap", component: () => import("pages/SendToMap.vue") },
       { path: "sent", component: () => import("pages/SentPage.vue") },
+      { path: "search", component: () => import("pages/SearchPage.vue") },
     ],
   },
 
