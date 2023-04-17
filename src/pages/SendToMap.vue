@@ -1,6 +1,14 @@
 <template>
-  <button @click="data()">cammom data</button>
+  <q-banner v-if="warning" inline-actions rounded class="bg-orange text-white">
+    1st - first select location | 2nd - second click load location from map |
+    3rd - finally click send
+  </q-banner>
   <div class="row">
+    <div
+      @click="data()"
+      style="width: 50%; min-width: 300px; height: 600px; margin: 15px"
+      ref="page"
+    ></div>
     <div style="width: 400px !important">
       <form style="width: 200px" action="">
         <div class="card-container">
@@ -33,14 +41,27 @@
               />
             </div>
             <q-input v-model="country" placeholder="Country" :dense="dense" />
-            <button style="margin-top: 20px" class="button-cta">Send to</button>
+
+            <q-btn
+              class="btn"
+              icon="sync"
+              unelevated
+              rounded
+              color="orange"
+              @click="data()"
+              label="Load location from map"
+            />
+            <q-btn
+              @click="send()"
+              class="btn"
+              color="red"
+              icon-right="send"
+              label="Send to"
+            />
           </div>
-          <div class="map" id="gmp-map"></div>
         </div>
       </form>
     </div>
-
-    <div style="width: 50%; min-width: 300px; height: 600px" ref="page"></div>
   </div>
 </template>
 
@@ -55,6 +76,7 @@ export default {
       state: "",
       zipcode: "",
       country: "",
+      warning: false,
     };
   },
   mounted: function () {
@@ -96,6 +118,13 @@ export default {
       this.country = mensagem[0].address_components[4].long_name;
 
       console.log(mensagem); // Saída: "Olá, mundo!"
+    },
+    send(e) {
+      if (this.address) {
+        console.log("tem");
+      } else {
+        this.warning = true;
+      }
     },
   },
 };
@@ -162,23 +191,14 @@ input {
   font-style: normal;
   font-weight: normal;
 }
+.btn {
+  margin-top: 20px;
+  max-width: 300px;
+  padding: 10px;
+}
 
 input:focus::placeholder {
   color: white;
-}
-
-.button-cta {
-  height: 40px;
-  width: 40%;
-  background: #3367d6;
-  color: white;
-  font-size: 15px;
-  text-transform: uppercase;
-  font-family: Roboto, sans-serif;
-  border: 0;
-  border-radius: 3px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.48);
-  cursor: pointer;
 }
 </style>
 

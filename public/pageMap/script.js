@@ -4,8 +4,6 @@ let geocoder;
 let responseDiv;
 let response;
 
-var mensagem = "Olá, mundo!"; //provisório
-
 map = new google.maps.Map(document.getElementById("map"), {
   zoom: 8,
   center: { lat: -9.5713058, lng: -36.7819505 },
