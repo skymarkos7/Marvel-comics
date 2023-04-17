@@ -128,6 +128,7 @@ export default {
     send() {
       if (this.address) {
         var arrayAddress = [];
+        var time = [];
         arrayAddress.push(this.address);
         arrayAddress.push(this.number);
         arrayAddress.push(this.city);
@@ -136,10 +137,8 @@ export default {
         arrayAddress.push(this.country);
 
         var jsonAddress = JSON.stringify(arrayAddress);
-        var comics = sessionStorage.getItem("comics");
 
-        localStorage.setItem("address" + Date.now(), jsonAddress);
-        localStorage.setItem("comics" + Date.now(), comics);
+        sessionStorage.setItem("locale", jsonAddress);
 
         window.location.href = "#/sent";
       } else {

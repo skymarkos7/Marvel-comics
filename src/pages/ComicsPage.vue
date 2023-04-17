@@ -113,7 +113,6 @@
               >
                 <q-checkbox
                   v-if="select"
-                  @click="selected(comic.id, checked)"
                   v-model="selecteds"
                   :val="comic.id"
                   label="Select"
@@ -155,16 +154,12 @@ export default defineComponent({
       ts: "1681397974539",
       hash: "ffa8f49a7ad19d9936f7f69be7ac1caa",
       limit: 52,
-      offset: "",
       load: false,
       select: false,
-      selecionado: false,
       comics: [],
       modal: false,
-      idComic: "",
       detailsComics: [],
       date: "",
-      checkedtemp: "",
       selecteds: [],
     };
   },
@@ -196,7 +191,6 @@ export default defineComponent({
     },
     fullWidth(id) {
       this.modal = true;
-      this.idComic = id;
       // console.log(id);
 
       const url = `http://gateway.marvel.com/v1/public/comics/${id}?apikey=${this.apikey}&ts=${this.ts}&hash=${this.hash}`;
