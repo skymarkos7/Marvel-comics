@@ -14,7 +14,7 @@
           />
           <q-btn
             style="margin-bottom: 15px"
-            v-if="selecteds.length > 0"
+            v-if="selecteds.length > 0 && select == true"
             @click="send()"
             color="red"
             icon-right="send"
@@ -24,8 +24,8 @@
 
         <div class="row justify-around items-center">
           <div id="containermodal" style="max-width: 300px">
-            <q-dialog v-model="modal" full-width>
-              <q-card id="modalsize" class="modalsize">
+            <q-dialog class="modaldetails" v-model="modal" full-width>
+              <q-card>
                 <q-card-section>
                   <div class="text-h6">MORE DETAILS</div>
                 </q-card-section>
@@ -105,9 +105,10 @@
             <q-card
               style="width: 250px; height: 350px"
               @click="fullWidth(comic.id, true)"
-              class="my-card"
+              class="cardcomics"
             >
               <q-img
+                class="imgcomics"
                 style="width: 100%; height: 100%; float: "
                 :src="comic.thumbnail.path + '.' + comic.thumbnail.extension"
               >
@@ -118,13 +119,6 @@
                   label="Select"
                   color="orange"
                 ></q-checkbox>
-                <q-icon
-                  right
-                  name="favorite"
-                  style="margin-left: 200px"
-                  color="teal"
-                  size="2em"
-                />
               </q-img>
               <q-card-section>
                 {{ comic.title }}
@@ -232,6 +226,18 @@ export default defineComponent({
 .containermodal {
   width: 50% !important;
   max-width: 500px !important;
+}
+
+.imgcomics:hover {
+  scale: 1.1;
+  transition: 0.5s;
+}
+
+.modaldetails {
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.35);
+  -webkit-backdrop-filter: blur(15px);
 }
 </style>
 
