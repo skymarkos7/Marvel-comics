@@ -21,6 +21,15 @@
               />
               <span class="sb-title">Address Selection</span>
             </div>
+            <q-btn
+              class="btn"
+              icon="sync"
+              unelevated
+              rounded
+              color="orange"
+              @click="data()"
+              label="Load location from map"
+            />
             <q-input v-model="address" placeholder="Address" :dense="dense" />
             <q-input
               v-model="number"
@@ -42,15 +51,6 @@
             </div>
             <q-input v-model="country" placeholder="Country" :dense="dense" />
 
-            <q-btn
-              class="btn"
-              icon="sync"
-              unelevated
-              rounded
-              color="orange"
-              @click="data()"
-              label="Load location from map"
-            />
             <q-btn
               @click="send()"
               class="btn"
@@ -104,22 +104,22 @@ export default {
   },
   methods: {
     data() {
-      // console.log(this.datas);
       // var nome = new URLSearchParams(window.location.search).get("nome");
       // console.log(nome);
-
-      var mensagem =
-        document.getElementById("myiframe").contentWindow.response.results;
-      this.address = mensagem[0].address_components[1].long_name;
-      this.number = mensagem[0].address_components[0].long_name;
-      this.city = mensagem[0].address_components[2].long_name;
-      this.state = mensagem[0].address_components[3].long_name;
-      this.zipcode = mensagem[0].address_components[5].long_name;
-      this.country = mensagem[0].address_components[4].long_name;
-
-      console.log(mensagem); // Saída: "Olá, mundo!"
+      try {
+        var mensagem =
+          document.getElementById("myiframe").contentWindow.response.results;
+        this.address = mensagem[0].address_components[1].long_name;
+        this.number = mensagem[0].address_components[0].long_name;
+        this.city = mensagem[0].address_components[2].long_name;
+        this.state = mensagem[0].address_components[3].long_name;
+        this.zipcode = mensagem[0].address_components[5].long_name;
+        this.country = mensagem[0].address_components[4].long_name;
+      } catch {
+        this.warning = true;
+      }
     },
-    send(e) {
+    send() {
       if (this.address) {
         console.log("tem");
       } else {
