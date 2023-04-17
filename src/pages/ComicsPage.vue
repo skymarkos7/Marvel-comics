@@ -4,9 +4,6 @@
       <i class="fa fa-spinner fa-spin flex flex-center" v-show="load">
         <LoadComponent />
       </i>
-      <div class="q-px-sm q-mt-sm">
-      Your selection is: <strong>{{ selecteds }}</strong>
-    </div>
 
       <div v-if="!load">
         <div class="justify-between row">
@@ -17,11 +14,11 @@
           />
           <q-btn
             style="margin-bottom: 15px"
-            v-if="select"
+            v-if="selecteds.length > 0"
+            @click="send()"
             color="red"
             icon-right="send"
-            to="SendToMap"
-            :label="'Send to comics selecteds: '+selecteds.length"
+            :label="'Send to comics selecteds: ' + selecteds.length"
           />
         </div>
 
@@ -114,7 +111,21 @@
                 style="width: 100%; height: 100%; float: "
                 :src="comic.thumbnail.path + '.' + comic.thumbnail.extension"
               >
-                <q-checkbox v-if="select" @click="selected(comic.id, checked)" v-model="selecteds" :val=comic.id label="Select" color="orange"></q-checkbox>
+                <q-checkbox
+                  v-if="select"
+                  @click="selected(comic.id, checked)"
+                  v-model="selecteds"
+                  :val="comic.id"
+                  label="Select"
+                  color="orange"
+                ></q-checkbox>
+                <q-icon
+                  right
+                  name="favorite"
+                  style="margin-left: 200px"
+                  color="teal"
+                  size="2em"
+                />
               </q-img>
               <q-card-section>
                 {{ comic.title }}
@@ -154,7 +165,7 @@ export default defineComponent({
       detailsComics: [],
       date: "",
       checkedtemp: "",
-      selecteds:[]
+      selecteds: [],
     };
   },
   setup() {
@@ -207,10 +218,14 @@ export default defineComponent({
           this.load = false; // defined load for false after call to API
         });
     },
-    selected(e) {
-      if (checkedtemp == e) {
+    send() {
+      if (this.selecteds.length > 0) {
+        var items = JSON.stringify(this.selecteds);
+        sessionStorage.setItem("comics", items);
+        window.location.href = "#/sendtomap";
+      } else {
+        alert("Select items before!");
       }
-      // console.log(this.checked);
     },
   },
   mounted: function () {

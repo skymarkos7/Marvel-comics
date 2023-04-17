@@ -70,6 +70,7 @@
 export default {
   data() {
     return {
+      fullAddress: [],
       address: "",
       number: "",
       city: "",
@@ -105,8 +106,9 @@ export default {
   methods: {
     data() {
       // var nome = new URLSearchParams(window.location.search).get("nome");
-      // console.log(nome);
+
       try {
+        this.warning = false;
         var mensagem =
           document.getElementById("myiframe").contentWindow.response.results;
         this.address = mensagem[0].address_components[1].long_name;
@@ -116,12 +118,30 @@ export default {
         this.zipcode = mensagem[0].address_components[5].long_name;
         this.country = mensagem[0].address_components[4].long_name;
       } catch {
-        this.warning = true;
+        if (!this.address.length > 0) {
+          this.warning = true;
+        }
       }
+      this.fullAddress = mensagem;
+      console.log(this.fullAddress);
     },
     send() {
       if (this.address) {
-        console.log("tem");
+        var arrayAddress = [];
+        arrayAddress.push(this.address);
+        arrayAddress.push(this.number);
+        arrayAddress.push(this.city);
+        arrayAddress.push(this.state);
+        arrayAddress.push(this.zipcode);
+        arrayAddress.push(this.country);
+
+        var jsonAddress = JSON.stringify(arrayAddress);
+        var comics = sessionStorage.getItem("comics");
+
+        localStorage.setItem("address" + Date.now(), jsonAddress);
+        localStorage.setItem("comics" + Date.now(), comics);
+
+        window.location.href = "#/sent";
       } else {
         this.warning = true;
       }

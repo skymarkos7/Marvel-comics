@@ -11,25 +11,20 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title>
-          Comics Marvel
-        </q-toolbar-title>
+        <q-toolbar-title> Comics Marvel </q-toolbar-title>
 
-        <a class="link" target="_blanck" href="https://www.linkedin.com/in/skymarkos7/"><div>Marcos Lourenço</div></a>
+        <a
+          class="link"
+          target="_blanck"
+          href="https://www.linkedin.com/in/skymarkos7/"
+          ><div>Marcos Lourenço</div></a
+        >
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
+    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
-        <q-item-label
-          header
-        >
-          Navegue
-        </q-item-label>
+        <q-item-label header> Navegue </q-item-label>
 
         <EssentialLink
           v-for="link in essentialLinks"
@@ -46,71 +41,70 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
+import { defineComponent, ref } from "vue";
+import EssentialLink from "components/EssentialLink.vue";
 
 const linksList = [
   {
-    title: 'Comics',
-    caption: 'Comics Marvel',
-    icon: 'menu_book',
-    link: '#/ComicsPage',
-    target:"_self"
-
+    title: "Comics",
+    caption: "Comics Marvel",
+    icon: "menu_book",
+    link: "#/comics",
+    target: "_self",
   },
   {
-    title: 'Favorites',
-    caption: 'The best comics',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev',
-    target:"_self"
+    title: "Favorites",
+    caption: "The best comics",
+    icon: "favorite",
+    link: "#/favorites",
+    target: "_self",
   },
   {
-    title: 'Search',
-    caption: 'Search comics',
-    icon: 'search',
-    link: '#',
-    target:"_self"
+    title: "Search",
+    caption: "Search comics",
+    icon: "search",
+    link: "#/search",
+    target: "_self",
   },
   {
-    title: 'Sent',
-    caption: 'Sent comics',
-    icon: 'send',
-    link: '#',
-    target:"_self"
+    title: "Sent",
+    caption: "Sent comics",
+    icon: "send",
+    link: "#/sent",
+    target: "_self",
   },
   {
-    title: 'Github',
-    caption: 'Repository',
-    icon: 'code',
-    link: 'https://github.com/skymarkos7/Marvel-comics',
-    target:"_self"
+    title: "Github",
+    caption: "Repository",
+    icon: "code",
+    link: "https://github.com/skymarkos7/Marvel-comics",
+    target: "_self",
   },
-]
+];
 
 export default defineComponent({
-  name: 'MainLayout',
+  name: "MainLayout",
 
   components: {
-    EssentialLink
+    EssentialLink,
   },
 
-  setup () {
-    const leftDrawerOpen = ref(false)
+  setup() {
+    const leftDrawerOpen = ref(false);
 
     return {
       essentialLinks: linksList,
       leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
-    }
-  }
-})
+      toggleLeftDrawer() {
+        leftDrawerOpen.value = !leftDrawerOpen.value;
+      },
+    };
+  },
+});
 </script>
 
 <style scoped>
-.link{
+.link {
   text-decoration: none;
   color: white;
 }
