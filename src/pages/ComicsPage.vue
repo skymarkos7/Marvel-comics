@@ -96,35 +96,47 @@
             </q-dialog>
           </div>
 
-          <div
-            v-for="(comic, index) in comics"
-            :key="index"
-            style="width: 250px; height: 380px; margin-bottom: 50px"
-            class="cointainer"
-          >
-            <q-card
-              style="width: 250px; height: 350px"
-              @click="fullWidth(comic.id, true)"
-              class="cardcomics"
+          <q-infinite-scroll class="row" @load="onLoad" :offset="250">
+            <div
+              v-for="(comic, index) in items"
+              :key="index"
+              style="
+                width: 250px;
+                height: 380px;
+                margin: 15px;
+                margin-bottom: 50px;
+              "
+              class="cointainer"
             >
-              <q-img
-                class="imgcomics"
-                style="width: 100%; height: 100%; float: "
-                :src="comic.thumbnail.path + '.' + comic.thumbnail.extension"
+              <q-card
+                style="width: 250px; height: 350px"
+                @click="fullWidth(comic.id, true)"
+                class="cardcomics"
               >
-                <q-checkbox
-                  v-if="select"
-                  v-model="selecteds"
-                  :val="comic.id"
-                  label="Select"
-                  color="orange"
-                ></q-checkbox>
-              </q-img>
-              <q-card-section>
-                {{ comic.title }}
-              </q-card-section>
-            </q-card>
-          </div>
+                <q-img
+                  class="imgcomics"
+                  style="width: 100%; height: 100%; float: "
+                  :src="comic.thumbnail.path + '.' + comic.thumbnail.extension"
+                >
+                  <q-checkbox
+                    v-if="select"
+                    v-model="selecteds"
+                    :val="comic.id"
+                    label="Select"
+                    color="orange"
+                  ></q-checkbox>
+                </q-img>
+                <q-card-section>
+                  {{ comic.title }}
+                </q-card-section>
+              </q-card>
+            </div>
+            <template v-slot:loading>
+              <div class="row justify-center q-my-md">
+                <q-spinner-dots color="primary" size="40px" />
+              </div>
+            </template>
+          </q-infinite-scroll>
         </div>
       </div>
     </div>
@@ -147,7 +159,7 @@ export default defineComponent({
       apikey: "a259607932a87320eddcc6417800ca53",
       ts: "1681397974539",
       hash: "ffa8f49a7ad19d9936f7f69be7ac1caa",
-      limit: 52,
+      limit: 50,
       load: false,
       select: false,
       comics: [],
@@ -155,6 +167,7 @@ export default defineComponent({
       detailsComics: [],
       date: "",
       selecteds: [],
+      items: [],
     };
   },
   setup() {
@@ -163,25 +176,17 @@ export default defineComponent({
     };
   },
   methods: {
-    loadData() {
-      const url = `http://gateway.marvel.com/v1/public/comics?apikey=${this.apikey}&ts=${this.ts}&hash=${this.hash}&limit=${this.limit}`;
-      this.load = true; // defined load for true before call to API
-      api
-        .get(url, {
-          /**
-           * If exits autentication jwt here on header
-           * headers: {
-           *   jwt: this.$store.state.session.jwt or "hsha165z54764z546574z65z4z543z"
-           * }
-           */
-        })
-        .then((response) => {
-          this.comics = response.data.data.results;
-          // console.log(response.data.data.results);
-        })
-        .finally(() => {
-          this.load = false; // defined load for false after call to API
-        });
+    async fetchComics() {
+      const url = `http://gateway.marvel.com/v1/public/comics?apikey=${this.apikey}&ts=${this.ts}&hash=${this.hash}&limit=${this.limit}&offset=${this.items.length}`;
+      const response = await fetch(url);
+      const data = await response.json();
+
+      return data.data.results;
+    },
+    async onLoad(index, done) {
+      const comics = await this.fetchComics();
+      this.items = [...this.items, ...comics];
+      done();
     },
     fullWidth(id) {
       this.modal = true;
@@ -217,7 +222,8 @@ export default defineComponent({
     },
   },
   mounted: function () {
-    this.loadData();
+    this.load = false; // defined load for false after call to API
+    // this.loadData();
   },
 });
 </script>

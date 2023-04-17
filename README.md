@@ -49,7 +49,8 @@ npx quasar build
 ## characteristics:
 
 - Screem of load
-- api with axios
+- Infinite scrool
+- api with axios | fetch
   - autentication api for get infos
     - apikey public
     - ts actualy
