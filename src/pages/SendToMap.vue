@@ -105,8 +105,6 @@ export default {
   },
   methods: {
     data() {
-      // var nome = new URLSearchParams(window.location.search).get("nome");
-
       try {
         this.warning = false;
         var mensagem =
@@ -123,7 +121,6 @@ export default {
         }
       }
       this.fullAddress = mensagem;
-      console.log(this.fullAddress);
     },
     send() {
       if (this.address) {

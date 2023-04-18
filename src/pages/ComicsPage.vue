@@ -8,6 +8,7 @@
       <div v-if="!load">
         <div class="justify-between row">
           <q-toggle
+            v-if="togle"
             style="margin-bottom: 15px"
             v-model="select"
             label="select items to send"
@@ -40,7 +41,7 @@
 
                   <div class="containerDetails row">
                     <div
-                      style="width: 300px; margin-right: 40px"
+                      style="width: 300px; height: 450px; margin-right: 40px"
                       class="imgDetails"
                     >
                       <q-img
@@ -115,7 +116,7 @@
               >
                 <q-img
                   class="imgcomics"
-                  style="width: 100%; height: 100%; float: "
+                  style="width: 100%; height: 100%"
                   :src="comic.thumbnail.path + '.' + comic.thumbnail.extension"
                 >
                   <q-checkbox
@@ -147,7 +148,6 @@
 import { defineComponent } from "vue";
 import { api } from "../boot/axios";
 import LoadComponent from "src/components/LoadComponent.vue";
-import { ref } from "vue";
 
 export default defineComponent({
   name: "ComicsPage",
@@ -161,6 +161,7 @@ export default defineComponent({
       hash: "ffa8f49a7ad19d9936f7f69be7ac1caa",
       limit: 50,
       load: false,
+      togle: false,
       select: false,
       comics: [],
       modal: false,
@@ -187,10 +188,10 @@ export default defineComponent({
       const comics = await this.fetchComics();
       this.items = [...this.items, ...comics];
       done();
+      this.togle = true;
     },
     fullWidth(id) {
       this.modal = true;
-      // console.log(id);
 
       const url = `http://gateway.marvel.com/v1/public/comics/${id}?apikey=${this.apikey}&ts=${this.ts}&hash=${this.hash}`;
       this.load = true; // defined load for true before call to API
@@ -198,11 +199,6 @@ export default defineComponent({
         .get(url, {})
         .then((response) => {
           this.detailsComics = response.data.data.results[0];
-          // console.log(response.data.data.results[0]);
-
-          /**
-           * Formact to date
-           */
           const date = new Date(response.data.data.results[0].dates[0].date);
           const options = { month: "long", day: "numeric", year: "numeric" };
           this.date = date.toLocaleDateString("en-US", options);
@@ -223,7 +219,6 @@ export default defineComponent({
   },
   mounted: function () {
     this.load = false; // defined load for false after call to API
-    // this.loadData();
   },
 });
 </script>

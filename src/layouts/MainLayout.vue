@@ -24,7 +24,7 @@
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
-        <q-item-label header> Navegue </q-item-label>
+        <q-item-label header> options </q-item-label>
 
         <EssentialLink
           v-for="link in essentialLinks"

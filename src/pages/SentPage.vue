@@ -17,7 +17,7 @@
 
       <q-tabs v-model="tab" class="text-teal">
         <q-tab label="Address" :name="key" />
-        <q-tab label="Comics" :name="key + 1" />
+        <q-tab label="Comics id" :name="key + 1" />
       </q-tabs>
 
       <q-separator />
@@ -79,8 +79,6 @@ export default defineComponent({
       ];
       x = [this.locale.join(",   ")];
     });
-
-    console.log(this.sentData);
   },
 });
 </script>
