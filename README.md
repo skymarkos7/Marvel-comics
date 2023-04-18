@@ -1,4 +1,5 @@
 # Quasar App (marvel-comics)
+[hospedado](http://comics.lourenco.club/#/)
 
 listagem de quadrinhos marvel
 
