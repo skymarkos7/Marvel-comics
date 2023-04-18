@@ -39,11 +39,8 @@
                     <LoadComponent />
                   </i>
 
-                  <div class="containerDetails row">
-                    <div
-                      style="width: 300px; height: 450px; margin-right: 40px"
-                      class="imgDetails"
-                    >
+                  <div class="row">
+                    <div class="imgDetails">
                       <q-img
                         :src="
                           detailsComics.thumbnail.path +
@@ -239,6 +236,11 @@ export default defineComponent({
   background: rgba(255, 255, 255, 0.15);
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.35);
   -webkit-backdrop-filter: blur(15px);
+}
+.imgDetails {
+  width: 300px;
+  height: 450px;
+  margin-right: 40px;
 }
 </style>
 

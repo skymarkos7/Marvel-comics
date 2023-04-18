@@ -49,7 +49,7 @@ const linksList = [
     title: "Comics",
     caption: "Comics Marvel",
     icon: "menu_book",
-    link: "#/comics",
+    link: "#",
     target: "_self",
   },
   {
@@ -61,7 +61,7 @@ const linksList = [
   },
   {
     title: "Sent ",
-    caption: "Sent comics",
+    caption: "Sent comics saved",
     icon: "send",
     link: "#/sent",
     target: "_self",
