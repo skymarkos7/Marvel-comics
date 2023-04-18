@@ -56,14 +56,8 @@ npx quasar build
     - ts actualy
     - hash = apikey public + apikey private + ts
 - google maps
-  - select address for clicking, zipcode, country, city etc.
+  - select address for clicking, zipcode, country, city.
   - iframe used to enable greater interaction with google maps.
 - versioning
 
-  - Using github on branch **develop** for development
-
-  ## pendencia
-
-  - carregar paginação
-  - possibilidade de filtro
-  - atualizar o hash a cada chamada
+  - Using github on branch **develop** for development end dist for review

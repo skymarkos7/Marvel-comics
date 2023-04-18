@@ -94,7 +94,7 @@
             </q-dialog>
           </div>
 
-          <q-infinite-scroll class="row" @load="onLoad" :offset="250">
+          <q-infinite-scroll class="row" @load="onLoad" :offset="150">
             <div
               v-for="(comic, index) in items"
               :key="index"
@@ -156,7 +156,7 @@ export default defineComponent({
       apikey: "a259607932a87320eddcc6417800ca53",
       ts: "1681397974539",
       hash: "ffa8f49a7ad19d9936f7f69be7ac1caa",
-      limit: 50,
+      limit: 15,
       load: false,
       togle: false,
       select: false,
