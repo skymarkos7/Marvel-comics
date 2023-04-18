@@ -1,7 +1,12 @@
 # Quasar App (marvel-comics)
 [overview](http://comics.lourenco.club/#/)
 
-listagem de quadrinhos marvel
+List of comics
+
+# warning
+### `Please Run on your computer locally for best results. Thanks`
+
+
 
 # Using framework to vue (quasar)
 
